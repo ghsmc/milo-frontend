@@ -610,7 +610,7 @@ function App() {
         className="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
         <img 
-          src="https://gmccain.com/milo.png"
+          src="/milo.png"
           alt="Milo"
           className="w-8 h-8 rounded-lg"
         />
@@ -865,6 +865,7 @@ function App() {
                 >
                   <div className="max-w-3xl mx-auto space-y-4">
                     {currentChat.messages.map((msg,index) => (
+                      
                       <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 10 }}
@@ -877,7 +878,7 @@ function App() {
                             ${isDark ? 'ring-1 ring-white/10' : 'shadow-sm'}
                           `}>
                             <img 
-                              src="https://gmccain.com/milo.png"
+                              src="/milo.png"
                               alt="Milo"
                               className="w-full h-full object-cover"
                             />
