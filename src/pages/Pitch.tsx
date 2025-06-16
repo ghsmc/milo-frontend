@@ -425,23 +425,6 @@ export function Pitch() {
                 ))}
               </div>
             </motion.div>
-
-            {/* Call to action */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.5, duration: 0.6 }}
-              className="mt-12"
-            >
-              <button
-                onClick={nextSlide}
-                className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl hover:bg-white/20 transition-all duration-300 flex items-center gap-3"
-              >
-                <Play className="w-5 h-5" />
-                <span className="font-medium">Start Presentation</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </motion.div>
           </div>
         </div>
       );
@@ -449,65 +432,115 @@ export function Pitch() {
 
     if (slide.content === "crisis") {
       return (
-        <div className="space-y-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h2>
-            <p className="text-xl text-gray-600">{slide.subtitle}</p>
-          </div>
+        <div className="min-h-screen bg-white p-8 flex flex-col justify-center">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-12"
+            >
+              <h1 className="text-5xl font-bold text-gray-900 mb-4">{slide.title}</h1>
+              <p className="text-2xl text-red-600 font-semibold">{slide.subtitle}</p>
+            </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-red-600 mb-6">THE DATA SPEAKS:</h3>
-              <div className="space-y-6">
-                {[
-                  { stat: "81.8%", desc: "of university students rate finding passionate work as 4/10 or lower" },
-                  { stat: "42.1%", desc: "biggest challenge: \"I don't fully know what's out there\"" },
-                  { stat: "52.6%", desc: "agree: \"Universities steer toward finance/consulting regardless of interests\"" },
-                  { stat: "26.3%", desc: "avoid career services entirely due to lack of trust" },
-                  { stat: "0.06%", desc: "LinkedIn's actual success rate (7 hires per 11,000 applications/minute)" }
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="text-3xl font-bold text-red-500 min-w-fit">{item.stat}</div>
-                    <div className="text-gray-700">{item.desc}</div>
-                  </motion.div>
-                ))}
-              </div>
-              <p className="text-sm text-gray-500 mt-6 italic">
-                Source: Original research across Wake Forest, UVM, Pitzer College, UW-Madison
-              </p>
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="space-y-8"
+              >
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">THE DATA SPEAKS:</h2>
+                
+                <div className="space-y-6">
+                  <div className="bg-red-50 p-6 rounded-xl border border-red-200">
+                    <div className="text-4xl font-bold text-red-600 mb-2">81.8%</div>
+                    <p className="text-gray-700">of university students rate finding passionate work as 4/10 or lower</p>
+                  </div>
+                  
+                  <div className="bg-orange-50 p-6 rounded-xl border border-orange-200">
+                    <div className="text-4xl font-bold text-orange-600 mb-2">42.1%</div>
+                    <p className="text-gray-700">biggest challenge: "I don't fully know what's out there"</p>
+                  </div>
+                  
+                  <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-200">
+                    <div className="text-4xl font-bold text-yellow-600 mb-2">52.6%</div>
+                    <p className="text-gray-700">agree: "Universities steer toward finance/consulting regardless of interests"</p>
+                  </div>
+                  
+                  <div className="bg-purple-50 p-6 rounded-xl border border-purple-200">
+                    <div className="text-4xl font-bold text-purple-600 mb-2">26.3%</div>
+                    <p className="text-gray-700">avoid career services entirely due to lack of trust</p>
+                  </div>
+                  
+                  <div className="bg-red-100 p-6 rounded-xl border border-red-300">
+                    <div className="text-4xl font-bold text-red-700 mb-2">0.06%</div>
+                    <p className="text-gray-700">LinkedIn's actual success rate (7 hires per 11,000 applications/minute)</p>
+                  </div>
+                </div>
+                
+                <p className="text-sm text-gray-500 italic">
+                  Source: Original research across Wake Forest, UVM, Pitzer College, UW-Madison
+                </p>
+              </motion.div>
 
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">THE HUMAN COST:</h3>
-              <div className="space-y-6">
-                {[
-                  { stat: "71%", desc: "feel \"stuck\" within 2 years of graduation", source: "(Li et al., 2021)" },
-                  { stat: "$1.3T", desc: "annual economic cost of career misalignment", source: "(McKinsey, 2023)" },
-                  { stat: "Rising", desc: "mental health crisis linked to work-related stress and purposelessness", source: "" }
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
-                    className="bg-red-50 p-6 rounded-lg border-l-4 border-red-500"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="text-2xl font-bold text-red-600 min-w-fit">{item.stat}</div>
-                      <div>
-                        <div className="text-gray-800 font-medium">{item.desc}</div>
-                        {item.source && <div className="text-sm text-gray-500 mt-1">{item.source}</div>}
-                      </div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+                className="space-y-8"
+              >
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">THE HUMAN COST:</h2>
+                
+                <div className="space-y-6">
+                  <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <div className="text-2xl font-bold text-gray-900">71%</div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                    <p className="text-gray-700">feel "stuck" within 2 years of graduation (Li et al., 2021)</p>
+                  </div>
+                  
+                  <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <div className="text-2xl font-bold text-gray-900">$1.3T</div>
+                    </div>
+                    <p className="text-gray-700">annual economic cost of career misalignment (McKinsey, 2023)</p>
+                  </div>
+                  
+                  <div className="bg-red-50 p-6 rounded-xl border border-red-200">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-3 h-3 bg-red-600 rounded-full"></div>
+                      <div className="text-xl font-bold text-red-600">Rising Crisis</div>
+                    </div>
+                    <p className="text-gray-700">Mental health crisis linked to work-related stress and purposelessness</p>
+                  </div>
+                </div>
+
+                {/* Visual representation */}
+                <div className="mt-12 p-6 bg-gradient-to-br from-red-50 to-orange-50 rounded-xl border border-red-200">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Career Misalignment Pipeline</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <ArrowRight className="text-red-500" size={16} />
+                      <span className="text-sm text-gray-700">Limited career discovery tools</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <ArrowRight className="text-red-500" size={16} />
+                      <span className="text-sm text-gray-700">Pressure toward "safe" traditional paths</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <ArrowRight className="text-red-500" size={16} />
+                      <span className="text-sm text-gray-700">Career-values misalignment</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <ArrowRight className="text-red-500" size={16} />
+                      <span className="text-sm text-gray-700">Burnout and disengagement</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -516,74 +549,134 @@ export function Pitch() {
 
     if (slide.content === "storm") {
       return (
-        <div className="space-y-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h2>
-            <p className="text-xl text-gray-600">{slide.subtitle}</p>
-          </div>
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-8 flex flex-col justify-center">
+          <div className="max-w-6xl mx-auto text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-12"
+            >
+              <h1 className="text-5xl font-bold mb-4">{slide.title}</h1>
+              <p className="text-2xl text-orange-400 font-semibold">{slide.subtitle}</p>
+            </motion.div>
 
-          <div className="space-y-12">
-            {[
-              {
-                number: "1",
-                title: "THE AUTHENTICITY CRISIS",
-                subtitle: "Structural Problem: Career discovery systems designed for institutional efficiency, not human fulfillment",
-                points: [
-                  "Students navigate 17+ disconnected platforms (University of Minnesota, 2023)",
-                  "Traditional career services optimize for placement rates, not satisfaction",
-                  "\"Prestige over purpose\" pipeline funnels brilliant minds into soul-crushing work"
-                ],
-                color: "red"
-              },
-              {
-                number: "2",
-                title: "THE AI DISPLACEMENT TSUNAMI",
-                subtitle: "Existential Threat: 40% of jobs face automation risk (IMF, 2024), creating career decision paralysis",
-                points: [
-                  "Students afraid to pursue creative/human-centered careers",
-                  "No guidance on which paths become MORE valuable as AI advances",
-                  "Mental health impact of choosing between passion and perceived security"
-                ],
-                color: "orange"
-              },
-              {
-                number: "3",
-                title: "THE SEARCH REVOLUTION GAP",
-                subtitle: "Technological Shift: Post-ChatGPT, users expect conversational intelligence, not keyword matching",
-                points: [
-                  "Career discovery stuck in Web 2.0 while everything else evolved",
-                  "Students want AI dialogue, not database queries",
-                  "Opportunity for complete paradigm shift in how humans discover meaningful work"
-                ],
-                color: "blue"
-              }
-            ].map((section, index) => (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <motion.div
-                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                className={`bg-${section.color}-50 p-8 rounded-xl border-l-4 border-${section.color}-500`}
+                transition={{ delay: 0.2 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
               >
-                <div className="flex items-start gap-6">
-                  <div className={`w-12 h-12 bg-${section.color}-500 text-white rounded-full flex items-center justify-center text-xl font-bold flex-shrink-0`}>
-                    {section.number}
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-white">1</span>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{section.title}</h3>
-                    <p className="text-gray-700 font-medium mb-4">{section.subtitle}</p>
-                    <ul className="space-y-2">
-                      {section.points.map((point, pointIndex) => (
-                        <li key={pointIndex} className="flex items-start gap-2">
-                          <div className={`w-2 h-2 bg-${section.color}-500 rounded-full mt-2 flex-shrink-0`}></div>
-                          <span className="text-gray-700">{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <h2 className="text-2xl font-bold text-red-400 mb-2">THE AUTHENTICITY CRISIS</h2>
+                  <p className="text-lg text-gray-300 font-semibold">Structural Problem</p>
                 </div>
+                
+                <p className="text-white/90 mb-4">
+                  Career discovery systems designed for institutional efficiency, not human fulfillment
+                </p>
+                
+                <ul className="space-y-3 text-sm text-gray-300">
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Students navigate 17+ disconnected platforms (University of Minnesota, 2023)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Traditional career services optimize for placement rates, not satisfaction</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>"Prestige over purpose" pipeline funnels brilliant minds into soul-crushing work</span>
+                  </li>
+                </ul>
               </motion.div>
-            ))}
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+              >
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-white">2</span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-orange-400 mb-2">THE AI DISPLACEMENT TSUNAMI</h2>
+                  <p className="text-lg text-gray-300 font-semibold">Existential Threat</p>
+                </div>
+                
+                <p className="text-white/90 mb-4">
+                  40% of jobs face automation risk (IMF, 2024), creating career decision paralysis
+                </p>
+                
+                <ul className="space-y-3 text-sm text-gray-300">
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Students afraid to pursue creative/human-centered careers</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>No guidance on which paths become MORE valuable as AI advances</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Mental health impact of choosing between passion and perceived security</span>
+                  </li>
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+              >
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-white">3</span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-blue-400 mb-2">THE SEARCH REVOLUTION GAP</h2>
+                  <p className="text-lg text-gray-300 font-semibold">Technological Shift</p>
+                </div>
+                
+                <p className="text-white/90 mb-4">
+                  Post-ChatGPT, users expect conversational intelligence, not keyword matching
+                </p>
+                
+                <ul className="space-y-3 text-sm text-gray-300">
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Career discovery stuck in Web 2.0 while everything else evolved</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Students want AI dialogue, not database queries</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Opportunity for complete paradigm shift in how humans discover meaningful work</span>
+                  </li>
+                </ul>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="mt-12 text-center"
+            >
+              <div className="bg-gradient-to-r from-red-500/20 via-orange-500/20 to-blue-500/20 rounded-xl p-8 border border-white/20">
+                <h3 className="text-2xl font-bold text-white mb-4">The Perfect Storm Creates Unprecedented Opportunity</h3>
+                <p className="text-lg text-gray-300">
+                  These three forces converging simultaneously create the ideal moment for a revolutionary approach to career discovery
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       );
@@ -591,644 +684,392 @@ export function Pitch() {
 
     if (slide.content === "breakthrough") {
       return (
-        <div className="space-y-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h2>
-            <p className="text-xl text-gray-600">{slide.subtitle}</p>
-          </div>
-
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl mb-8">
-            <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">
-              CORE INNOVATION: Human-AI Symbiosis for Career Discovery
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 p-8 flex flex-col justify-center">
+          <div className="max-w-6xl mx-auto text-white">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-blue-50 p-6 rounded-xl border border-blue-200"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-12"
             >
-              <h4 className="text-xl font-bold text-blue-900 mb-4">AUTONOMOUS INTELLIGENCE LAYER</h4>
-              <p className="text-blue-800 font-medium mb-4">Always-On Discovery Engine:</p>
-              <ul className="space-y-3">
-                {[
-                  "Distributed web crawling across 100+ platforms using advanced pattern recognition",
-                  "Semantic opportunity classification identifying meaningful work traditional aggregators miss",
-                  "Real-time market intelligence surfacing opportunities within seconds of posting",
-                  "Predictive pathway modeling analyzing which careers strengthen as AI advances"
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <h1 className="text-5xl font-bold mb-4">{slide.title}</h1>
+              <p className="text-2xl text-blue-300 font-semibold">{slide.subtitle}</p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="bg-purple-50 p-6 rounded-xl border border-purple-200"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-center mb-12"
             >
-              <h4 className="text-xl font-bold text-purple-900 mb-4">CONVERSATIONAL INTELLIGENCE LAYER</h4>
-              <p className="text-purple-800 font-medium mb-4">Human-Centered Dialogue System:</p>
-              <ul className="space-y-3">
-                {[
-                  "Values archaeology through natural conversation, not surveys",
-                  "Authentic interest discovery challenging assumptions about \"practical\" vs. \"passionate\"",
-                  "Dynamic personality modeling evolving understanding through each interaction",
-                  "Explainable AI recommendations showing WHY opportunities align with authentic self"
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">{item}</span>
+              <h2 className="text-3xl font-bold text-white mb-4">CORE INNOVATION: Human-AI Symbiosis for Career Discovery</h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20"
+              >
+                <div className="text-center mb-6">
+                  <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Zap className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-green-400 mb-2">AUTONOMOUS INTELLIGENCE LAYER</h3>
+                  <p className="text-lg text-gray-300 font-semibold">Always-On Discovery Engine</p>
+                </div>
+                
+                <ul className="space-y-4 text-sm text-gray-300">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Distributed web crawling</span> across 100+ platforms using advanced pattern recognition
+                    </div>
                   </li>
-                ))}
-              </ul>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Semantic opportunity classification</span> identifying meaningful work traditional aggregators miss
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Real-time market intelligence</span> surfacing opportunities within seconds of posting
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Predictive pathway modeling</span> analyzing which careers strengthen as AI advances
+                    </div>
+                  </li>
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20"
+              >
+                <div className="text-center mb-6">
+                  <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Brain className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-purple-400 mb-2">CONVERSATIONAL INTELLIGENCE LAYER</h3>
+                  <p className="text-lg text-gray-300 font-semibold">Human-Centered Dialogue System</p>
+                </div>
+                
+                <ul className="space-y-4 text-sm text-gray-300">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Values archaeology</span> through natural conversation, not surveys
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Authentic interest discovery</span> challenging assumptions about "practical" vs. "passionate"
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Dynamic personality modeling</span> evolving understanding through each interaction
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <span className="font-semibold text-white">Explainable AI recommendations</span> showing WHY opportunities align with authentic self
+                    </div>
+                  </li>
+                </ul>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="text-center"
+            >
+              <div className="bg-gradient-to-r from-green-500/20 via-blue-500/20 to-purple-500/20 rounded-xl p-8 border border-white/20">
+                <h3 className="text-2xl font-bold text-white mb-4">INTEGRATION BREAKTHROUGH:</h3>
+                <p className="text-lg text-gray-300">
+                  <span className="font-semibold text-white">Seamless synthesis</span> where autonomous discoveries inform conversational insights, creating personalized career intelligence that works 24/7 while maintaining human agency
+                </p>
+              </div>
             </motion.div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl text-white"
-          >
-            <h4 className="text-xl font-bold mb-4">INTEGRATION BREAKTHROUGH:</h4>
-            <p className="text-lg">
-              Seamless synthesis where autonomous discoveries inform conversational insights, creating personalized career intelligence that works 24/7 while maintaining human agency
-            </p>
-          </motion.div>
         </div>
       );
     }
 
     if (slide.content === "technical") {
       return (
-        <div className="space-y-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h2>
-            <p className="text-xl text-gray-600">{slide.subtitle}</p>
-          </div>
-
-          <div className="space-y-8">
-            {/* Values Vector Architecture */}
+        <div className="min-h-screen bg-white p-8 flex flex-col justify-center">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl border border-purple-200"
+              className="text-center mb-12"
             >
-              <h3 className="text-2xl font-bold text-purple-900 mb-6">VALUES VECTOR ARCHITECTURE™</h3>
-              <p className="text-purple-800 font-medium mb-6">Revolutionary Approach to Human Authenticity Encoding:</p>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <ul className="space-y-3">
-                    {[
-                      "Multi-dimensional embeddings encoding passion, purpose, creativity, autonomy, impact",
-                      "Behavioral pattern analysis learning from implicit feedback",
-                      "Values hierarchy modeling understanding individual preference weights",
-                      "Authentic interest synthesis combining stated preferences with discovered patterns"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-gray-900 mb-4">Live Values Analysis</h4>
-                  <div className="space-y-3">
-                    {[
-                      { label: "Creativity", value: 87, color: "bg-purple-500" },
-                      { label: "Impact", value: 94, color: "bg-blue-500" },
-                      { label: "Autonomy", value: 76, color: "bg-green-500" },
-                      { label: "Purpose", value: 91, color: "bg-orange-500" }
-                    ].map((item, index) => (
-                      <div key={index}>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-700">{item.label}</span>
-                          <span className="font-medium">{item.value}%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <motion.div
-                            className={`h-2 rounded-full ${item.color}`}
-                            initial={{ width: 0 }}
-                            animate={{ width: `${item.value}%` }}
-                            transition={{ delay: index * 0.1, duration: 0.8 }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <h1 className="text-5xl font-bold text-gray-900 mb-4">{slide.title}</h1>
+              <p className="text-2xl text-blue-600 font-semibold">{slide.subtitle}</p>
             </motion.div>
 
-            {/* Hybrid Semantic Search Engine */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-xl border border-blue-200"
-            >
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">HYBRID SEMANTIC SEARCH ENGINE</h3>
-              <p className="text-blue-800 font-medium mb-6">Enterprise-Grade Discovery Infrastructure:</p>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <ul className="space-y-3">
-                    {[
-                      "Dense embeddings: LLaMA-text-embed-v2 for semantic understanding",
-                      "Sparse retrieval: Keyword precision for technical requirements",
-                      "Vector database: Pinecone for sub-second similarity search across 200K+ records",
-                      "Real-time indexing: Redis caching architecture for instant results",
-                      "Quality scoring: ML models ranking opportunity authenticity and fit"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-gray-900 mb-4">Performance Metrics</h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { label: "Response Time", value: "<200ms", icon: "⚡" },
-                      { label: "Records Indexed", value: "200K+", icon: "📊" },
-                      { label: "Search Accuracy", value: "94.7%", icon: "🎯" },
-                      { label: "Uptime", value: "99.9%", icon: "🔄" }
-                    ].map((metric, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.4 + index * 0.1, duration: 0.4 }}
-                        className="text-center p-3 bg-blue-50 rounded-lg"
-                      >
-                        <div className="text-2xl mb-1">{metric.icon}</div>
-                        <div className="font-bold text-blue-900">{metric.value}</div>
-                        <div className="text-xs text-gray-600">{metric.label}</div>
-                      </motion.div>
-                    ))}
+            <div className="space-y-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-200"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">VALUES VECTOR ARCHITECTURE™</h2>
+                    <p className="text-lg text-blue-600 font-semibold">Revolutionary Approach to Human Authenticity Encoding</p>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Multi-dimensional embeddings</span> encoding passion, purpose, creativity, autonomy, impact
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Behavioral pattern analysis</span> learning from implicit feedback (time spent, engagement patterns)
+                      </div>
+                    </li>
+                  </ul>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Values hierarchy modeling</span> understanding individual preference weights
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Authentic interest synthesis</span> combining stated preferences with discovered patterns
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </motion.div>
 
-            {/* Automation-Resistance Prediction Engine */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-xl border border-green-200"
-            >
-              <h3 className="text-2xl font-bold text-green-900 mb-6">AUTOMATION-RESISTANCE PREDICTION ENGINE</h3>
-              <p className="text-green-800 font-medium mb-6">Proprietary AI Resilience Modeling:</p>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <ul className="space-y-3">
-                    {[
-                      "Labor economics integration: Real-time analysis of automation risk by industry/role",
-                      "Human capability mapping: Identifying work requiring creativity, empathy, complex reasoning",
-                      "Future trend analysis: Predicting which skills become MORE valuable as AI advances",
-                      "Career pathway simulation: Monte Carlo modeling of long-term career resilience"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">{item}</span>
-                      </li>
-                    ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8 border border-purple-200"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center">
+                    <Brain className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">HYBRID SEMANTIC SEARCH ENGINE</h2>
+                    <p className="text-lg text-purple-600 font-semibold">Enterprise-Grade Discovery Infrastructure</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Dense embeddings:</span> LLaMA-text-embed-v2 for semantic understanding
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Sparse retrieval:</span> Keyword precision for technical requirements
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Vector database:</span> Pinecone for sub-second similarity search across 200K+ records
+                      </div>
+                    </li>
+                  </ul>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Real-time indexing:</span> Redis caching architecture for instant results
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Quality scoring:</span> ML models ranking opportunity authenticity and fit
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-200"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+                    <Sparkles className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">AUTOMATION-RESISTANCE PREDICTION ENGINE</h2>
+                    <p className="text-lg text-green-600 font-semibold">Proprietary AI Resilience Modeling</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Labor economics integration:</span> Real-time analysis of automation risk by industry/role
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Human capability mapping:</span> Identifying work requiring creativity, empathy, complex reasoning
+                      </div>
+                    </li>
+                  </ul>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Future trend analysis:</span> Predicting which skills become MORE valuable as AI advances
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div>
+                        <span className="font-semibold">Career pathway simulation:</span> Monte Carlo modeling of long-term career resilience
+                      </div>
+                    </li>
                   </ul>
                 </div>
                 
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-gray-900 mb-4">AI Resilience Score</h4>
-                  <div className="text-center">
-                    <motion.div
-                      className="relative w-32 h-32 mx-auto mb-4"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.6, duration: 0.8 }}
-                    >
-                      <svg className="w-32 h-32 transform -rotate-90">
-                        <circle
-                          cx="64"
-                          cy="64"
-                          r="56"
-                          stroke="currentColor"
-                          strokeWidth="8"
-                          fill="transparent"
-                          className="text-gray-200"
-                        />
-                        <motion.circle
-                          cx="64"
-                          cy="64"
-                          r="56"
-                          stroke="currentColor"
-                          strokeWidth="8"
-                          fill="transparent"
-                          strokeDasharray={`${2 * Math.PI * 56}`}
-                          className="text-green-500"
-                          initial={{ strokeDashoffset: 2 * Math.PI * 56 }}
-                          animate={{ strokeDashoffset: 2 * Math.PI * 56 * (1 - 0.89) }}
-                          transition={{ delay: 0.8, duration: 1.5 }}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-2xl font-bold text-green-600">89%</span>
-                      </div>
+                <div className="mt-6 bg-white rounded-lg p-4 border border-green-300">
+                  <div className="flex items-center justify-center gap-4">
+                    <div className="text-center">
+                      <span className="text-2xl font-bold text-green-600">89%</span>
                     </div>
                     <p className="text-sm text-gray-600">
                       <strong>Technical Result:</strong> 89% accuracy in identifying automation-resistant career paths
                     </p>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      );
-    }
-
-    if (slide.content === "research") {
-      return (
-        <div className="space-y-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h2>
-            <p className="text-xl text-gray-600">{slide.subtitle}</p>
-          </div>
-
-          <div className="space-y-8">
-            {/* Original Research Findings */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-blue-50 p-8 rounded-xl border border-blue-200"
-            >
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">ORIGINAL RESEARCH FINDINGS</h3>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <p className="text-blue-800 font-medium mb-4">Multi-University Study (N=19, Expanding to 200+):</p>
-                  <ul className="space-y-2">
-                    <li><strong>Universities:</strong> Wake Forest, UVM, Pitzer College, UW-Madison</li>
-                    <li><strong>Demographics:</strong> Diverse majors (Finance, Computer Science, Philosophy, Food Systems)</li>
-                    <li><strong>Geographic spread:</strong> East Coast, Midwest, West Coast validation</li>
-                  </ul>
-                </div>
-                <div className="bg-white p-6 rounded-lg">
-                  <h4 className="font-semibold text-gray-900 mb-4">Study Demographics</h4>
-                  <div className="space-y-3">
-                    {[
-                      { label: "Computer Science", value: 31.6, color: "bg-blue-500" },
-                      { label: "Business", value: 26.3, color: "bg-green-500" },
-                      { label: "Liberal Arts", value: 21.1, color: "bg-purple-500" },
-                      { label: "STEM", value: 21.0, color: "bg-orange-500" }
-                    ].map((item, index) => (
-                      <div key={index}>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-700">{item.label}</span>
-                          <span className="font-medium">{item.value}%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <motion.div
-                            className={`h-2 rounded-full ${item.color}`}
-                            initial={{ width: 0 }}
-                            animate={{ width: `${item.value}%` }}
-                            transition={{ delay: index * 0.1, duration: 0.8 }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Key Behavioral Insights */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="bg-green-50 p-8 rounded-xl border border-green-200"
-            >
-              <h3 className="text-2xl font-bold text-green-900 mb-6">KEY BEHAVIORAL INSIGHTS:</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { stat: "73.7%", desc: "adoption intent for AI-powered career discovery", color: "green" },
-                  { stat: "57.9%", desc: "willingness to pay for authentic career alignment tools", color: "blue" },
-                  { stat: "42.1%", desc: "report career services \"make little to no difference\"", color: "orange" },
-                  { stat: "10.5%", desc: "report career services actually helped find meaningful work", color: "red" }
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                    className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500"
-                  >
-                    <div className="text-3xl font-bold text-green-600 mb-2">{item.stat}</div>
-                    <div className="text-gray-700">{item.desc}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Psychological Framework Validation */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="bg-purple-50 p-8 rounded-xl border border-purple-200"
-            >
-              <h3 className="text-2xl font-bold text-purple-900 mb-6">PSYCHOLOGICAL FRAMEWORK VALIDATION:</h3>
-              <div className="bg-white p-6 rounded-lg">
-                <h4 className="text-xl font-semibold text-gray-900 mb-4">Career Misalignment → Mental Health Pipeline:</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    { title: "Chronic stress", desc: "from work-value misalignment", icon: "😰" },
-                    { title: "Decision paralysis", desc: "from too many low-quality options", icon: "🤔" },
-                    { title: "Imposter syndrome", desc: "from pursuing inauthentic paths", icon: "😔" },
-                    { title: "Burnout prevention", desc: "through early authentic alignment", icon: "✨" }
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="text-2xl">{item.icon}</div>
-                      <div>
-                        <div className="font-semibold text-gray-900">{item.title}</div>
-                        <div className="text-gray-600 text-sm">{item.desc}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Competitive Intelligence */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="bg-red-50 p-8 rounded-xl border border-red-200"
-            >
-              <h3 className="text-2xl font-bold text-red-900 mb-6">COMPETITIVE INTELLIGENCE:</h3>
-              <div className="bg-white rounded-lg overflow-hidden">
-                <h4 className="text-xl font-semibold text-gray-900 p-6 pb-4">Traditional Platform Failure Analysis:</h4>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Platform</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Success Rate</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Key Issue</th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {[
-                        { platform: "LinkedIn", rate: "0.00006%", issue: "11,000 applications/minute, 7 hires" },
-                        { platform: "Handshake", rate: "Low", issue: "University-focused but still keyword-based matching" },
-                        { platform: "Indeed/ZipRecruiter", rate: "Very Low", issue: "High volume, low quality, no values alignment" },
-                        { platform: "Career Services", rate: "Minimal", issue: "One-size-fits-all approach with minimal personalization" }
-                      ].map((row, index) => (
-                        <tr key={index}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{row.platform}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-semibold">{row.rate}</td>
-                          <td className="px-6 py-4 text-sm text-gray-500">{row.issue}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      );
-    }
-
-    // Add other slide content here following the same pattern...
-    // For brevity, I'll include a few more key slides and then provide a fallback
-
-    if (slide.content === "datasets") {
-      return (
-        <div className="space-y-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h2>
-            <p className="text-xl text-gray-600">{slide.subtitle}</p>
-          </div>
-
-          <div className="space-y-8">
-            {/* Exclusive Data Assets */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl border border-blue-200"
-            >
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">EXCLUSIVE DATA ASSETS:</h3>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {[
-                  {
-                    title: "Alumni Career Journey Database",
-                    items: [
-                      "100K+ Yale alumni career transition patterns",
-                      "Unconventional pathway mapping: Literature → Documentary → Climate Policy",
-                      "Success pattern recognition: Which authentic transitions actually work economically",
-                      "Mentorship graph analysis: Connection patterns for warm introductions"
-                    ],
-                    icon: "👥",
-                    color: "blue"
-                  },
-                  {
-                    title: "Company Culture Intelligence",
-                    items: [
-                      "100K+ organization profiles with deep cultural analysis",
-                      "Mission-driven scoring: Quantifying authentic company values vs. corporate speak",
-                      "Growth stage modeling: Startup, scale-up, enterprise culture patterns",
-                      "Values alignment prediction: Company-individual fit scoring"
-                    ],
-                    icon: "🏢",
-                    color: "green"
-                  },
-                  {
-                    title: "Real-Time Opportunity Intelligence",
-                    items: [
-                      "Live web scraping across job boards, fellowship sites, research programs",
-                      "Opportunity classification: Traditional jobs vs. meaningful work detection",
-                      "Temporal pattern analysis: When meaningful opportunities typically appear",
-                      "Geographic opportunity mapping: Remote vs. location-specific patterns"
-                    ],
-                    icon: "🔍",
-                    color: "purple"
-                  }
-                ].map((asset, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2, duration: 0.6 }}
-                    className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="text-2xl">{asset.icon}</div>
-                      <h4 className="font-bold text-gray-900">{asset.title}</h4>
-                    </div>
-                    <ul className="space-y-2">
-                      {asset.items.map((item, itemIndex) => (
-                        <li key={itemIndex} className="flex items-start gap-2">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-gray-700 text-sm">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Enhanced Data Flywheel Effect */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-xl border border-purple-200"
-            >
-              <h3 className="text-2xl font-bold text-purple-900 mb-6">AI TRAINING METHODOLOGY:</h3>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <h4 className="text-xl font-semibold text-purple-800 mb-4">Human-in-the-Loop Learning:</h4>
-                  <ul className="space-y-3">
-                    {[
-                      "Conversation mining: Learning authentic interest patterns from user dialogue",
-                      "Outcome feedback: Career satisfaction tracking for algorithm improvement",
-                      "Values calibration: Continuous refinement of authenticity detection",
-                      "Bias mitigation: Actively countering traditional career pathway bias"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="flex items-center justify-center">
-                  <DataFlywheelVisualization />
-                </div>
-              </div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="mt-8 bg-gradient-to-r from-purple-600 to-pink-600 p-6 rounded-lg text-white text-center"
-              >
-                <h4 className="text-xl font-bold mb-2">Data Flywheel Effect:</h4>
-                <p className="text-lg">Each user interaction improves recommendations for all users</p>
               </motion.div>
-            </motion.div>
+            </div>
           </div>
         </div>
       );
     }
 
-    // Fallback for other slides
+    // Return a placeholder for other slides
     return (
-      <div className="space-y-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h2>
-          <p className="text-xl text-gray-600">{slide.subtitle}</p>
-        </div>
-        <div className="bg-gray-50 p-12 rounded-xl text-center">
-          <div className="text-6xl mb-4">🚧</div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Slide Content Coming Soon</h3>
-          <p className="text-gray-600">This slide contains detailed content that will be fully implemented.</p>
+      <div className="min-h-screen bg-gray-100 p-8 flex flex-col justify-center">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{slide.title}</h1>
+          <p className="text-xl text-gray-600 mb-8">{slide.subtitle}</p>
+          <div className="bg-white rounded-xl p-8 shadow-lg">
+            <p className="text-gray-500">Content for this slide is being developed...</p>
+          </div>
         </div>
       </div>
     );
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900 text-white">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between h-16">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
             <Link
               to="/"
-              className="flex items-center gap-2 px-2 py-1 -ml-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
             >
               <ArrowLeft size={20} />
-              <span>Back</span>
+              <span>Back to App</span>
             </Link>
             
             <div className="flex items-center gap-4">
-              <div className="text-sm text-gray-500">
-                Slide {currentSlide + 1} of {slides.length}
-              </div>
-              <div className="flex items-center">
-                <img 
-                  src="/logo_clean.png"
-                  alt="Milo"
-                  className="h-8 w-8 object-contain"
-                />
+              <span className="text-sm text-gray-400">
+                {currentSlide + 1} / {slides.length}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={prevSlide}
+                  className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                  disabled={currentSlide === 0}
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+                  disabled={currentSlide === slides.length - 1}
+                >
+                  <ChevronRight size={20} />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Main Content */}
-      <div className="h-[calc(100vh-4rem)] overflow-y-auto">
-        <div className="max-w-7xl mx-auto">
-          {renderSlideContent()}
-        </div>
+      {/* Slide Content */}
+      <div className="pt-16">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {renderSlideContent()}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      {/* Controls */}
-      {currentSlide > 0 && (
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-gray-200">
+      {/* Slide Indicators */}
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="flex items-center gap-2 bg-black/80 backdrop-blur-sm rounded-full px-4 py-2">
+          {slides.map((_, index) => (
             <button
-              onClick={prevSlide}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-              disabled={currentSlide === 0}
-            >
-              <ChevronLeft size={20} className={currentSlide === 0 ? 'text-gray-300' : 'text-gray-700'} />
-            </button>
-
-            <div className="flex gap-2">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentSlide ? 'bg-blue-600' : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={nextSlide}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-              disabled={currentSlide === slides.length - 1}
-            >
-              <ChevronRight size={20} className={currentSlide === slides.length - 1 ? 'text-gray-300' : 'text-gray-700'} />
-            </button>
-          </div>
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                index === currentSlide ? 'bg-white' : 'bg-gray-600'
+              }`}
+            />
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
