@@ -13,6 +13,7 @@ import { HomePage } from './components/HomePage';
 import { ProfilePage } from './components/ProfilePage';
 import { Conviction } from './pages/Conviction';
 import { Feed } from './pages/Feed';
+import { Pitch } from './pages/Pitch';
 import { getGPTResponse } from './services/ai';
 
 const categories = [
@@ -1017,6 +1018,7 @@ function App() {
       <Routes>
         <Route path="/conviction" element={<Conviction />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/pitch" element={<Pitch />} />
         <Route path="/*" element={<MainContent />} />
       </Routes>
     </Router>
