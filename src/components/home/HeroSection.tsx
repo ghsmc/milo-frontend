@@ -39,9 +39,9 @@ export function HeroSection({ inView, onGetStarted }: HeroSectionProps) {
         >
           <div className="flex items-center gap-4 mb-6">
             <img 
-              src="https://gmccain.com/milo.png"
+              src="/logo_clean.png"
               alt="Milo"
-              className="w-12 h-12 lg:w-16 lg:h-16 rounded-xl shadow-lg"
+              className="w-12 h-12 lg:w-16 lg:h-16 object-contain shadow-lg"
             />
             <h2 className="text-4xl lg:text-6xl font-bold text-gray-900">
               Milo

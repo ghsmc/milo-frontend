@@ -231,7 +231,7 @@ export function UIPreview({ onGetStarted }: UIPreviewProps) {
               <img 
                 src={result.logo}
                 alt={result.name}
-                className="w-8 h-8 rounded bg-white flex-shrink-0"
+                className="w-8 h-8 object-contain bg-white flex-shrink-0"
               />
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
@@ -349,9 +349,9 @@ export function UIPreview({ onGetStarted }: UIPreviewProps) {
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-lg blur-sm" />
             <img 
-              src="https://gmccain.com/milo.png"
+              src="/logo_clean.png"
               alt="Milo"
-              className="relative w-8 h-8 rounded-lg"
+              className="relative w-8 h-8 object-contain"
             />
           </div>
           <div>
@@ -373,9 +373,9 @@ export function UIPreview({ onGetStarted }: UIPreviewProps) {
               >
                 {message.role === 'assistant' && (
                   <img 
-                    src="https://gmccain.com/milo.png"
+                    src="/logo_clean.png"
                     alt="Milo"
-                    className="w-7 h-7 rounded-lg flex-shrink-0 mt-0.5"
+                    className="w-7 h-7 object-contain flex-shrink-0 mt-0.5"
                   />
                 )}
                 <div 

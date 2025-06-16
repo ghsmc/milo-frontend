@@ -317,9 +317,9 @@ export function Feed() {
 
               <div className="flex items-center">
                 <img 
-                  src="https://gmccain.com/milo.png"
+                  src="/logo_clean.png"
                   alt="Milo"
-                  className="h-8 w-8 rounded-lg"
+                  className="h-8 w-8 object-contain"
                 />
               </div>
             </div>
@@ -362,9 +362,9 @@ export function Feed() {
               <div className="relative rounded-xl border border-gray-200 bg-gray-50 hover:bg-white transition-colors duration-200">
                 <div className="flex items-center px-4 py-3">
                   <img 
-                    src="https://gmccain.com/milo.png"
+                    src="/logo_clean.png"
                     alt="Milo"
-                    className="w-6 h-6 rounded-lg mr-3"
+                    className="w-6 h-6 object-contain mr-3"
                   />
                   <input
                     type="text"
@@ -431,7 +431,7 @@ export function Feed() {
                     <img
                       src={job.companyLogo}
                       alt={job.company}
-                      className="w-8 h-8 rounded bg-white flex-shrink-0"
+                      className="w-8 h-8 object-contain bg-white flex-shrink-0"
                     />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
@@ -515,9 +515,9 @@ export function Feed() {
 
         {/* Bottom Navigation */}
         <div className="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-200 flex items-center justify-around px-6 pb-safe">
-          <button className="p-2 text-gray-900">
+          <Link to="/" className="p-2 text-gray-900">
             <Home size={24} />
-          </button>
+          </Link>
           <button className="p-2 text-gray-500">
             <Search size={24} />
           </button>

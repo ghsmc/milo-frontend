@@ -20,7 +20,7 @@ export function MetricsBar({ isDark, metrics }: MetricsBarProps) {
     >
       <div className="flex items-center justify-center gap-3">
         <img 
-          src="https://thumb.ac-illust.com/f3/f3cf90c7866487298e571d271a5f5564_t.jpeg"
+          src="/logo_clean.png"
           alt="Token"
           className="w-12 h-12 object-contain"
         />

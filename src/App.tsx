@@ -610,9 +610,9 @@ function App() {
         className="flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
         <img 
-          src="/milo.png"
+          src="/logo_clean.png"
           alt="Milo"
-          className="w-8 h-8 rounded-lg"
+          className="w-8 h-8 object-contain"
         />
         <div className="hidden sm:block">
           <span className="text-lg font-extrabold tracking-[0.15em] sf-pro">
@@ -878,9 +878,9 @@ function App() {
                             ${isDark ? 'ring-1 ring-white/10' : 'shadow-sm'}
                           `}>
                             <img 
-                              src="/milo.png"
+                              src="/logo_clean.png"
                               alt="Milo"
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain"
                             />
                           </div>
                         )}
