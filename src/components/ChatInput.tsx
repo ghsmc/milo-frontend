@@ -55,18 +55,12 @@ export function ChatInput({
   }, [localValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
     const newValue = e.target.value;
     setLocalValue(newValue);
     onChange(newValue);
   };
 
-  const handleSubmit = (e?: React.FormEvent | React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  const handleSubmit = () => {
     if (!isDisabled && localValue.trim()) {
       onSend();
     }
@@ -75,18 +69,15 @@ export function ChatInput({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      e.stopPropagation();
       handleSubmit();
     }
   };
 
-  const handleButtonClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleButtonClick = () => {
     if (isLoading) {
       onStop?.();
     } else {
-      handleSubmit(e);
+      handleSubmit();
     }
   };
 
@@ -102,8 +93,7 @@ export function ChatInput({
     <div className="fixed bottom-0 left-0 right-0 z-20 md:left-64 pb-safe">
       <div className="px-2 sm:px-4 pb-2 sm:pb-4">
         <div className="relative mx-auto max-w-[44rem]">
-          <form 
-            onSubmit={handleSubmit}
+          <div 
             className={`
               relative rounded-xl border
               ${isDark 
@@ -178,7 +168,7 @@ export function ChatInput({
                 )}
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
