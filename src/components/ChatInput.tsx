@@ -55,12 +55,18 @@ export function ChatInput({
   }, [localValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
     const newValue = e.target.value;
     setLocalValue(newValue);
     onChange(newValue);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e?: React.FormEvent | React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (!isDisabled && localValue.trim()) {
       onSend();
     }
@@ -69,7 +75,18 @@ export function ChatInput({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
+      e.stopPropagation();
       handleSubmit();
+    }
+  };
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isLoading) {
+      onStop?.();
+    } else {
+      handleSubmit(e);
     }
   };
 
@@ -85,7 +102,8 @@ export function ChatInput({
     <div className="fixed bottom-0 left-0 right-0 z-20 md:left-64 pb-safe">
       <div className="px-2 sm:px-4 pb-2 sm:pb-4">
         <div className="relative mx-auto max-w-[44rem]">
-          <div 
+          <form 
+            onSubmit={handleSubmit}
             className={`
               relative rounded-xl border
               ${isDark 
@@ -128,13 +146,8 @@ export function ChatInput({
               </div>
 
               <button
-                onClick={() => {
-                  if (isLoading) {
-                    onStop?.();
-                  } else {
-                    handleSubmit();
-                  }
-                }}
+                type="button"
+                onClick={handleButtonClick}
                 disabled={!localValue.trim() || isDisabled}
                 className={`
                   p-1.5 rounded-lg transition-all duration-200
@@ -165,7 +178,7 @@ export function ChatInput({
                 )}
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
