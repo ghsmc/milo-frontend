@@ -1073,8 +1073,6 @@ function App() {
         </Routes>
       </Router>
     </AuthGuard>
-      </Router>
-    </AuthGuard>
   );
 }
 
