@@ -346,6 +346,65 @@ function App() {
   const lastScrollTop = useRef(0);
   const prevJobPanelState = useRef(isJobPanelOpen);
 
+  // Prevent unnecessary re-renders by using useCallback
+  const handleChatInputChange = useCallback((value: string) => {
+    setChatInput(value);
+  }, []);
+
+  const handleSendMessage = useCallback(() => {
+    if (!chatInput.trim()) return;
+
+    setCategoryChats(prev => ({
+      ...prev,
+      [activeTab]: {
+        ...prev[activeTab],
+        messages: [
+          ...prev[activeTab].messages,
+          { role: 'user', content: chatInput }
+        ],
+        isLoading: true,
+        isGenerating: true,
+        isStreaming: true
+      }
+    }));
+
+    setChatInput('');
+
+    setCategoryChats(prev => ({
+      ...prev,
+      [activeTab]: {
+        ...prev[activeTab],
+        messages: [
+          ...prev[activeTab].messages,
+          { role: 'assistant', content: '' }
+        ]
+      }
+    }));
+
+    getGPTResponse(chatInput, activeTab as any, (text) => {
+      setCategoryChats(prev => ({
+        ...prev,
+        [activeTab]: {
+          ...prev[activeTab],
+          messages: [
+            ...prev[activeTab].messages.slice(0, -1),
+            { role: 'assistant', content: text }
+          ]
+        }
+      }));
+    }).finally(() => {
+      setCategoryChats(prev => ({
+        ...prev,
+        [activeTab]: {
+          ...prev[activeTab],
+          isLoading: false,
+          isGenerating: false,
+          isStreaming: false
+        }
+      }));
+    });
+  }, [chatInput, activeTab]);
+
   const [categoryChats, setCategoryChats] = useState<Record<string, CategoryChatHistory>>({
     jobs: {
       messages: [{
@@ -521,59 +580,6 @@ function App() {
     });
   };
 
-  const handleSendMessage = () => {
-    if (!chatInput.trim()) return;
-
-    setCategoryChats(prev => ({
-      ...prev,
-      [activeTab]: {
-        ...prev[activeTab],
-        messages: [
-          ...prev[activeTab].messages,
-          { role: 'user', content: chatInput }
-        ],
-        isLoading: true,
-        isGenerating: true,
-        isStreaming: true
-      }
-    }));
-
-    setChatInput('');
-
-    setCategoryChats(prev => ({
-      ...prev,
-      [activeTab]: {
-        ...prev[activeTab],
-        messages: [
-          ...prev[activeTab].messages,
-          { role: 'assistant', content: '' }
-        ]
-      }
-    }));
-
-    getGPTResponse(chatInput, activeTab as any, (text) => {
-      setCategoryChats(prev => ({
-        ...prev,
-        [activeTab]: {
-          ...prev[activeTab],
-          messages: [
-            ...prev[activeTab].messages.slice(0, -1),
-            { role: 'assistant', content: text }
-          ]
-        }
-      }));
-    }).finally(() => {
-      setCategoryChats(prev => ({
-        ...prev,
-        [activeTab]: {
-          ...prev[activeTab],
-          isLoading: false,
-          isGenerating: false,
-          isStreaming: false
-        }
-      }));
-    });
-  };
 
   const activeCategory = categories.find(cat => cat.id === activeTab) || categories[0];
   const currentChat = categoryChats[activeTab];
