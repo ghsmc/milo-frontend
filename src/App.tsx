@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthGuard } from './components/auth/AuthGuard';
-import { useAuth } from './hooks/useAuth';
-import { AuthGuard } from './components/auth/AuthGuard';
-import { useAuth } from './hooks/useAuth';
 import { Menu, X, ArrowLeft, ChevronDown, Briefcase, ChevronUp, PanelRightClose, PanelRightOpen, ChevronRight, UserCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchFilters } from './components/SearchFilters';
@@ -339,7 +335,6 @@ interface CategoryChatHistory {
 
 function App() {
   const { theme, activeTheme, setActiveTheme, isDark, setIsDark } = useTheme('light');
-  const { user, signOut } = useAuth();
   const { user, signOut } = useAuth();
   const [activeTab, setActiveTab] = useState('jobs');
   const [chatInput, setChatInput] = useState('');
