@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Menu, X, ArrowLeft, ChevronDown, Briefcase, ChevronUp, PanelRightClose, PanelRightOpen, ChevronRight, UserCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
