@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthGuard } from './components/auth/AuthGuard';
 import { useAuth } from './hooks/useAuth';
+import { AuthGuard } from './components/auth/AuthGuard';
+import { useAuth } from './hooks/useAuth';
 import { Menu, X, ArrowLeft, ChevronDown, Briefcase, ChevronUp, PanelRightClose, PanelRightOpen, ChevronRight, UserCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SearchFilters } from './components/SearchFilters';
@@ -337,6 +339,7 @@ interface CategoryChatHistory {
 
 function App() {
   const { theme, activeTheme, setActiveTheme, isDark, setIsDark } = useTheme('light');
+  const { user, signOut } = useAuth();
   const { user, signOut } = useAuth();
   const [activeTab, setActiveTab] = useState('jobs');
   const [chatInput, setChatInput] = useState('');
@@ -788,6 +791,20 @@ function App() {
                 onThemeChange={setActiveTheme}
                 onDarkModeChange={setIsDark}
               />
+              {user && (
+                <button
+                  onClick={() => signOut()}
+                  className={`
+                    px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200
+                    ${isDark
+                      ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
+                      : 'bg-red-50 text-red-600 hover:bg-red-100'
+                    }
+                  `}
+                >
+                  Sign Out
+                </button>
+              )}
               <button
                 onClick={() => setShowProfile(true)}
                 className={`
@@ -800,6 +817,20 @@ function App() {
               >
                 <UserCircle2 size={20} />
               </button>
+              {user && (
+                <button
+                  onClick={() => signOut()}
+                  className={`
+                    px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200
+                    ${isDark
+                      ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
+                      : 'bg-red-50 text-red-600 hover:bg-red-100'
+                    }
+                  `}
+                >
+                  Sign Out
+                </button>
+              )}
               {user && (
                 <button
                   onClick={() => signOut()}
@@ -1045,6 +1076,8 @@ function App() {
           <Route path="/pitch" element={<Pitch />} />
           <Route path="/*" element={<MainContent />} />
         </Routes>
+      </Router>
+    </AuthGuard>
       </Router>
     </AuthGuard>
   );
