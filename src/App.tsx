@@ -1007,7 +1007,7 @@ function App() {
             <ChatInput
               isDark={isDark}
               value={chatInput}
-              onChange={setChatInput}
+              onChange={handleChatInputChange}
               onSend={handleSendMessage}
               isLoading={currentChat.isLoading}
               isGenerating={currentChat.isGenerating}
